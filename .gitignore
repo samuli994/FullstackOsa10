@@ -11,6 +11,7 @@
 # production
 /build
 /dist
+/rate-repository-app-old
 
 # misc
 .DS_Store
