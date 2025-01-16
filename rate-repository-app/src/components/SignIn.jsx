@@ -2,6 +2,7 @@ import React from 'react';
 import { Text, View, TextInput, Button, StyleSheet } from 'react-native';
 import { Formik } from 'formik';
 import * as Yup from 'yup';
+import useSignIn from '../hooks/useSignIn';
 
 const validationSchema = Yup.object().shape({
   username: Yup.string().required('Username is required'),
@@ -9,8 +10,17 @@ const validationSchema = Yup.object().shape({
 });
 
 const SignIn = () => {
-  const onSubmit = (values) => {
-    console.log(values);
+  const [signIn] = useSignIn();
+
+  const onSubmit = async (values) => {
+    const { username, password } = values;
+
+    try {
+      const { authenticate } = await signIn({ username, password });
+      console.log('Access Token:', authenticate.accessToken);
+    } catch (e) {
+      console.error('Error:', e);
+    }
   };
 
   return (
