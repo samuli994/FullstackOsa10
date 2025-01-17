@@ -16,10 +16,9 @@ const SignIn = () => {
     const { username, password } = values;
 
     try {
-      const { authenticate } = await signIn({ username, password });
-      console.log('Access Token:', authenticate.accessToken);
+      await signIn({ username, password });
     } catch (e) {
-      console.error('Error:', e);
+      console.error(e);
     }
   };
 
